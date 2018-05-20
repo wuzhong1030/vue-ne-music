@@ -7,7 +7,7 @@
       <i class="iconfont icon-search"></i>
       <span class="name">搜索</span>
     </router-link>
-    <router-link to="/mv" tag="div" class="menu-item">
+    <router-link to="/finder" tag="div" class="menu-item">
       <i class="iconfont icon-finder"></i>
       <span class="name">发现音乐</span>
     </router-link>
