@@ -1,11 +1,12 @@
 <!-- 发现音乐 -->
 <template>
-  <div>
-发现音乐
+  <div class="finder-container">
+    <carousel></carousel>
   </div>
 </template>
 
 <script type="ecmascript-6">
+import Carousel from "../components/Carousel.vue";
 export default {
   name: "",
 
@@ -13,7 +14,9 @@ export default {
     return {};
   },
 
-  components: {},
+  components: {
+    Carousel
+  },
 
   created() {},
 
@@ -24,4 +27,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.finder-container {
+  // width: 100%;
+}
 </style>

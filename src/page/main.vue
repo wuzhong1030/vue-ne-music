@@ -38,7 +38,8 @@ export default {
 .main-container {
   width: 80vw;
   height: 80vh;
-  min-width: 900px;
+  min-width: 627px;
+  min-height: 666px;
   background: #fff;
   box-shadow: 0 0 20px 10px #eee;
   .content-wrapper {

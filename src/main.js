@@ -6,6 +6,7 @@ import routes from "./router"
 import App from './App'
 
 // Vue.config.productionTip = false
+import 'swiper/dist/css/swiper.css';
 
 Vue.use(VueRouter);
 

@@ -3,7 +3,7 @@
   <div class="search-container">
     <div class="serarch-wrapper">
       <div class="input-wrapper">
-        <input type="text" class="input" @focus="resultVisible = true" @blur="resultVisible = false" v-model="keywords" placeholder="搜索音乐、歌手、歌词、用户">
+        <input type="text" class="input" @input="handleSearchInput" @focus="resultVisible = true" @blur="resultVisible = false" v-model="keywords" placeholder="搜索音乐、歌手、歌词、用户">
         <i class="iconfont icon-search"></i>
       </div>
       <ul class="result-list" v-if="resultVisible&&keywords·">
@@ -33,13 +33,15 @@
 </template>
 
 <script type="ecmascript-6">
-import { getHotSearch } from "../service/api";
+import { getHotSearchApi, getInputSearchApi } from "../service/api";
+import _ from "lodash"
 export default {
   name: "",
 
   data() {
     return {
       hotTags: [],
+      searchResult: null,
       keywords: "",
       resultVisible: false
     };
@@ -55,13 +57,21 @@ export default {
 
   methods: {
     _initHotSearch() {
-      getHotSearch().then(res => {
+      getHotSearchApi().then(res => {
         console.log(res);
         if (res.data.code === 200) {
           this.hotTags = res.data.result.hots;
         }
       });
-    }
+    },
+    handleSearchInput: _.debounce(() => {
+      getInputSearchApi(this.keywords).then(res => {
+        console.log(res)
+        if (res.data.code === 200) {
+          this.searchResult = res.data.result;
+        }
+      })
+    })
   }
 };
 </script>
