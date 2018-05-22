@@ -49,6 +49,9 @@ export default {
       flex: 0 0 100px;
     }
     .right-wrapper {
+      margin: 0 auto;
+      min-width: 480px;
+      max-width: 960px;
       flex: 1;
     }
   }

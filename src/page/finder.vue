@@ -1,12 +1,12 @@
 <!-- 发现音乐 -->
 <template>
   <div class="finder-container">
-    <carousel></carousel>
+    <banner></banner>
   </div>
 </template>
 
 <script type="ecmascript-6">
-import Carousel from "../components/Carousel.vue";
+import Banner from "../components/Banner.vue";
 export default {
   name: "",
 
@@ -15,7 +15,7 @@ export default {
   },
 
   components: {
-    Carousel
+    Banner
   },
 
   created() {},

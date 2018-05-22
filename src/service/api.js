@@ -14,7 +14,7 @@ axios.interceptors.request.use((config) => {
 })
 axios.interceptors.response.use((response) => {
   return response;
-}, () => {
+}, (error) => {
   return Promise.reject(error)
 })
 
@@ -26,4 +26,9 @@ export function getHotSearchApi(id) {
 //搜索多重匹配
 export function getInputSearchApi(keywords) {
   return axios.get(baseUrl + `/search/multimatch?keywords=${keywords}`);
+}
+
+//轮播图
+export function getBanner() {
+  return axios.get(baseUrl + `/banner`);
 }
