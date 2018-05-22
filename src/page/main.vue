@@ -26,6 +26,8 @@ export default {
 
   components: { MHeader, SlideMenu },
 
+
+
   created() {},
 
   mounted() {},
