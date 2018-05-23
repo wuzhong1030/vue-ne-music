@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="postcss">
-@import "./assets/style/reset.css";
+@import "./assets/style/common.css";
 @import "./assets/iconfont/iconfont.css";
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -23,9 +23,14 @@ export function getHotSearchApi(id) {
   return axios.get(baseUrl + `/search/hot`)
 }
 
-//搜索多重匹配
-export function getInputSearchApi(keywords) {
-  return axios.get(baseUrl + `/search/multimatch?keywords=${keywords}`);
+//搜索建议
+export function getSearchSgtApi(keywords) {
+  return axios.get(baseUrl + `/search/suggest?keywords=${keywords}`);
+}
+
+//搜索建议
+export function getSearchResApi(keywords) {
+  return axios.get(baseUrl + `/search?keywords=${keywords}`);
 }
 
 //轮播图

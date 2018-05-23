@@ -1,7 +1,7 @@
 <!-- 发现音乐 -->
 <template>
   <div class="finder-container">
-    <banner></banner>xx
+    <banner></banner>
   </div>
 </template>
 

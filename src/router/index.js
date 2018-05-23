@@ -1,4 +1,3 @@
-const main = resolve => require.ensure([], () => resolve(require("../page/main.vue")), 'main')
 const search = resolve => require.ensure([], () => resolve(require("../page/search.vue")), 'search')
 const finder = resolve => require.ensure([], () => resolve(require("../page/finder.vue")), 'finder')
 const mv = resolve => require.ensure([], () => resolve(require("../page/mv.vue")), 'mv')
