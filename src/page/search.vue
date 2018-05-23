@@ -6,7 +6,7 @@
         <input type="text" class="input" @input="handleSearchInput" @focus="resultVisible = true" @blur="resultVisible = false" v-model="keywords" placeholder="搜索音乐、歌手、歌词、用户">
         <i class="iconfont icon-search"></i>
       </div>
-      <ul class="result-list" v-if="resultVisible&&keywords·">
+      <ul class="result-list" v-if="resultVisible&&keywords">
         <li class="result-item">
           <i class="iconfont icon-search"></i>
           <span class="result">搜索"{{keywords}}"</span>
@@ -34,7 +34,8 @@
 
 <script type="ecmascript-6">
 import { getHotSearchApi, getInputSearchApi } from "../service/api";
-import _ from "lodash"
+import { debounce } from "../common/util.js";
+// import _ from "lodash"
 export default {
   name: "",
 
@@ -53,6 +54,14 @@ export default {
     this._initHotSearch();
   },
 
+  watch: {
+    keywords(val, oldVal) {
+      debounce(() => {
+        this.handleSearchInput();
+      }, 300);
+    }
+  },
+
   mounted() {},
 
   methods: {
@@ -64,14 +73,14 @@ export default {
         }
       });
     },
-    handleSearchInput: _.debounce(() => {
+    handleSearchInput() {
       getInputSearchApi(this.keywords).then(res => {
-        console.log(res)
+        console.log(res);
         if (res.data.code === 200) {
           this.searchResult = res.data.result;
         }
-      })
-    })
+      });
+    }
   }
 };
 </script>

@@ -4,7 +4,7 @@
 import axios from 'axios'
 import {
   baseUrl
-} from '../config/env'
+} from '../common/env'
 
 axios.defaults.timeout = 6000;
 axios.interceptors.request.use((config) => {
