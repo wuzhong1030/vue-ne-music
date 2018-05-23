@@ -2,11 +2,11 @@
 <template>
   <div class="serarch-wrapper">
     <div class="input-wrapper">
-      <input type="text" class="input" v-clickoutside='closeHandle' @focus="resultVisible = true" @blur="resultVisible = false" v-model="keywords" placeholder="搜索音乐、歌手、歌词、用户" @keyup.enter="doSearchHandle">
-      <i class="iconfont icon-remove" v-show="resultVisible&&keywords" @click.stop="removeSearchHandle"></i>
+      <input type="text" class="input" v-model="keywords" placeholder="搜索音乐、歌手、歌词、用户" @keyup.enter="doSearchHandle">
+      <i class="iconfont icon-remove" v-show="keywords" @click.stop="removeSearchHandle"></i>
       <i class="iconfont icon-search"></i>
     </div>
-    <ul class="result-list" v-show="keywords&&resultVisible">
+    <ul class="result-list" v-show="keywords">
       <li class="result-item">
         <i class="iconfont icon-search"></i>
         <span class="result">搜索"{{keywords}}"</span>
@@ -19,24 +19,25 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-import Clickoutside from "../common/clickoutside";
-import Emitter from "../common/emitter";
+// import Clickoutside from "../common/clickoutside";
+// import Emitter from "../common/emitter";
 import { getSearchSgtApi, getSearchResApi } from "../service/api";
 import { debounce } from "../common/util.js";
+
 export default {
   data() {
     return {
       searchResult: null,
       searchSuggest: null,
       keywords: "",
-      resultVisible: false
     };
   },
-  directives: {
-    Clickoutside
-  },
 
-  mixins: [Emitter],
+  // directives: {
+  //   Clickoutside
+  // },
+
+  // mixins: [Emitter],
 
   components: {},
 
@@ -54,9 +55,6 @@ export default {
   },
 
   methods: {
-    closeHandle() {
-      this.keywords = "";
-    },
     removeSearchHandle(e) {
       this.keywords = "";
     },
@@ -77,7 +75,9 @@ export default {
     }
   },
 
-  mounted() {}
+  mounted() {
+   
+  }
 };
 </script>
 <style scoped lang="postcss">
