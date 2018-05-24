@@ -64,7 +64,11 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      {
+        test: /\.tpl\.html$/,
+        loader: 'html-template-loader11'
+     }
     ]
   },
   node: {

@@ -22,7 +22,7 @@
 // import Clickoutside from "../common/clickoutside";
 // import Emitter from "../common/emitter";
 import { getSearchSgtApi, getSearchResApi } from "../service/api";
-import { debounce } from "../common/util.js";
+import { debounce } from "../common/util";
 
 export default {
   data() {
@@ -30,6 +30,7 @@ export default {
       searchResult: null,
       searchSuggest: null,
       keywords: "",
+      resultVisible: false
     };
   },
 
@@ -69,6 +70,7 @@ export default {
     handleSearchInput() {
       getSearchSgtApi(this.keywords).then(res => {
         if (res.data.code === 200) {
+          console.log(res);
           this.searchSuggest = res.data.result.songs;
         }
       });
@@ -76,7 +78,20 @@ export default {
   },
 
   mounted() {
-   
+    window.addEventListener("resize", () => {
+      if (
+        document.activeElement.tagName === "INPUT" ||
+        document.activeElement.tagName === "TEXTAREA"
+      ) {
+        window.setTimeout(function() {
+          if ("scrollIntoView" in document.activeElement) {
+            document.activeElement.scrollIntoView();
+          } else {
+            document.activeElement.scrollIntoViewIfNeeded();
+          }
+        }, 0);
+      }
+    });
   }
 };
 </script>
