@@ -4,9 +4,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from "./router"
 import App from './App'
+import * as filters from "./common/filter"
 
 // Vue.config.productionTip = false
 import 'swiper/dist/css/swiper.css';
+
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
 Vue.use(VueRouter);
 
@@ -19,5 +22,5 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
-  render: h => h(App) 
+  render: h => h(App)
 })

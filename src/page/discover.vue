@@ -1,7 +1,9 @@
 <!-- 发现音乐 -->
 <template>
   <div class="finder-container">
-    <banner></banner>
+    <div class="banner-wrapper">
+      <banner></banner>
+    </div>
     <nav class="nav-wrapper">
       <section class="nav-item">
         <div class="nav-item-wrapper">
@@ -47,9 +49,11 @@
         </div>
       </div>
       <div class="recommend-list">
-        <section class="rec-inner">
-          <div class="cover"></div>
-          <p class="desc"></p>
+        <section class="recomd-box" v-for="item in recommendList" :key="item.id">
+          <div class="recomd-cover" :style="{backgroundImage: `url(${item.picUrl})`}">
+            <span class="play-count">{{item.playCount | ten}}</span>
+          </div>
+          <p class="recomd-desc">{{item.name}}</p>
         </section>
       </div>
     </div>
@@ -58,27 +62,44 @@
 
 <script type="ecmascript-6">
 import Banner from "../components/Banner.vue";
+import { getPersonalizedApi } from "../service/api";
 export default {
   name: "",
 
   data() {
-    return {};
+    return {
+      recommendList: []
+    };
   },
 
   components: {
     Banner
   },
 
-  created() {},
+  created() {
+    this._getPersonalized();
+  },
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    _getPersonalized() {
+      getPersonalizedApi().then(res => {
+        console.log(res);
+        if (res.data.code === 200) {
+          this.recommendList = res.data.result;
+        }
+      });
+    }
+  }
 };
 </script>
 
 <style lang="postcss" scoped>
 .finder-container {
+  .banner-wrapper {
+    margin-top: 20px;
+  }
   .nav-wrapper {
     display: flex;
     justify-content: space-between;
@@ -141,10 +162,46 @@ export default {
       }
     }
     .recommend-list {
-      .rec-inner {
-        .cover {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .recomd-box {
+        position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+        width: 15%;
+        &:after {
+          display: block;
+          content: "";
+          margin-top: 100%;
         }
-        .desc {
+        .recomd-cover {
+          height: 100%;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          .play-count {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 14px;
+            line-height: 14px;
+            color: #fff;
+            padding: 0 8px;
+            font-size: 12px;
+            background: linear-gradient(
+              to left,
+              rgba(123, 123, 123, 0.8),
+              rgba(123, 123, 123, 0.1)
+            );
+          }
+        }
+        .recomd-desc {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-top: 8px;
+          line-height: 1;
         }
       }
     }

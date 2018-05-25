@@ -1,6 +1,6 @@
 <!-- 轮播图 -->
 <template>
-  <div class="carousel-container">
+  <div class="banner-container">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(item, index) in banner" :key="index" :style="{backgroundImage: `url(${item.picUrl})`}">
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style lang="postcss">
-.carousel-container {
+.banner-container {
   .swiper-container {
     width: 848px;
     height: 280px;

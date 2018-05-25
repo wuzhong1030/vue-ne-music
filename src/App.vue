@@ -39,7 +39,7 @@ export default {
   .main-container {
     width: 70vw;
     height: 80vh;
-    min-width: 627px;
+    min-width: 1150px;
     min-height: 666px;
     background: #fff;
     box-shadow: 0 0 20px 10px #eee;
@@ -51,9 +51,11 @@ export default {
       }
       .right-wrapper {
         margin: 0 auto;
-        min-width: 480px;
-        max-width: 960px;
+        min-width: 960px;
+        padding: 0 10%;
         flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
     }
   }

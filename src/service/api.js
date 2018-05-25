@@ -37,3 +37,8 @@ export function getSearchResApi(keywords) {
 export function getBanner() {
   return axios.get(baseUrl + `/banner`);
 }
+
+//推荐歌单
+export function getPersonalizedApi() {
+  return axios.get(baseUrl + `/personalized`);
+}
