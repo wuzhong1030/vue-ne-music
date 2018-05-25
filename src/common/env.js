@@ -1,4 +1,4 @@
-let baseUrl = 'http://120.79.162.149:3000'
+let baseUrl = 'http://localhost:3030'
 
 export {
   baseUrl

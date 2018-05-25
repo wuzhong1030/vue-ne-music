@@ -1,5 +1,5 @@
 const search = resolve => require.ensure([], () => resolve(require("../page/search.vue")), 'search')
-const finder = resolve => require.ensure([], () => resolve(require("../page/finder.vue")), 'finder')
+const discover = resolve => require.ensure([], () => resolve(require("../page/discover.vue")), 'discover')
 const mv = resolve => require.ensure([], () => resolve(require("../page/mv.vue")), 'mv')
 const friend = resolve => require.ensure([], () => resolve(require("../page/friend.vue")), 'friend')
 
@@ -7,15 +7,11 @@ const notFound = resolve => require.ensure([], () => resolve(require("../page/no
 
 export default [{
     path: "/",
-    component: finder,
+    component: discover,
   },
   {
     path: "/search",
     component: search
-  },
-  {
-    path: "/finder",
-    component: finder
   },
   {
     path: "/mv",

@@ -54,7 +54,6 @@ export default {
         loop: true,
         loopedSlides: 8,
         autoplay: 2000,
-
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
@@ -78,7 +77,7 @@ export default {
               scale == 1
                 ? slide.transform(`translate(${translate}) scale(1)`)
                 : slide.transform(
-                    `translate(${translate}, 16px) scale(${0.8})`
+                    `translate(${translate}, 23px) scale(${0.8})`
                   );
               slide.css("zIndex", zIndex);
               slide.css("opacity", 1);
@@ -107,19 +106,22 @@ export default {
 <style lang="postcss">
 .carousel-container {
   .swiper-container {
+    width: 848px;
+    height: 280px;
     .swiper-wrapper {
-      width: 730px;
-      height: 336px;
+      width: 521px;
+      height: 240px;
       .swiper-slide {
         width: 100%;
         height: 100%;
         background-position: center;
-        background-size: cover;
+        background-size: 100% 100%;
         background-repeat: no-repeat;
       }
     }
   }
   .swiper-pagination {
+    bottom: 50px;
     .swiper-pagination-bullet {
       height: 1.5px;
       width: 20px;
@@ -131,7 +133,7 @@ export default {
   }
   .swiper-button-prev {
     left: 0;
-    height: 100%;
+    height: 67%;
     margin-top: 0;
     transform: translateY(-50%);
     background-size: 22.5px 18.3px;
@@ -141,7 +143,7 @@ export default {
   }
   .swiper-button-next {
     right: 0;
-    height: 100%;
+    height: 67%;
     margin-top: 0;
     transform: translateY(-50%);
     background-size: 22.5px 18.3px;

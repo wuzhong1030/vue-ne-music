@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- <keep-alive>
-      <router-view></router-view>
-    </keep-alive> -->
     <div class="main-container">
       <m-header></m-header>
       <div class="content-wrapper">
@@ -40,7 +37,7 @@ export default {
   width: 100vw;
   overflow: hidden;
   .main-container {
-    width: 80vw;
+    width: 70vw;
     height: 80vh;
     min-width: 627px;
     min-height: 666px;

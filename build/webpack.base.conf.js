@@ -67,7 +67,7 @@ module.exports = {
       },
       {
         test: /\.tpl\.html$/,
-        loader: 'html-template-loader11'
+        loader: 'html-template-loader'
      }
     ]
   },
