@@ -45,7 +45,8 @@
           <span class="text">推荐歌单</span>
         </div>
         <div class="right">
-
+          <span class="text">更多</span>
+          <i class="icon">></i>
         </div>
       </div>
       <div class="recommend-list">
@@ -148,10 +149,13 @@ export default {
     margin-top: 20px;
     .title-inner {
       display: flex;
+      justify-content: space-between;
       height: 40px;
       line-height: 40px;
+      color: #999;
       border-bottom: 1px solid #e8e8e8;
       .left {
+        font-size: 14px;
         .icon {
           color: #d43b33;
         }
@@ -159,6 +163,7 @@ export default {
         }
       }
       .right {
+        font-size: 12px;
       }
     }
     .recommend-list {
