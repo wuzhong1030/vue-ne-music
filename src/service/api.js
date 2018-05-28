@@ -52,3 +52,8 @@ export function getPrivatecontentApi() {
 export function getNewSongApi() {
   return axios.get(baseUrl + `/personalized/newsong`);
 }
+
+//推荐新音乐
+export function getNewMVApi() {
+  return axios.get(baseUrl + `/personalized/mv`);
+}

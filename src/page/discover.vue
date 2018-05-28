@@ -92,8 +92,9 @@
       <ul class="newsong-list">
         <li class="song-item" v-for="(item, index) in newSongList" :key="item.id">
           <div class="song-cover">
-            <span class="index">{{index}}</span>
-            <img class="cover" :src="item.song.album.picUrl" alt="">
+            <span class="index">{{(index+1
+              <10)?( '0'+(index+1)):(index+1)}}</span>
+                <img class="cover" :src="item.song.album.picUrl" alt="">
           </div>
           <div class="song-info">
             <span class="song-name">{{item.song.name}}</span>
@@ -101,6 +102,26 @@
           </div>
         </li>
       </ul>
+    </div>
+    <!-- 推荐MV -->
+    <div class="recommend-mv">
+      <div class="title-inner">
+        <div class="left">
+          <i class="icon"></i>
+          <span class="text">推荐MV</span>
+        </div>
+        <div class="right">
+          <span class="text">更多</span>
+          <i class="icon">></i>
+        </div>
+      </div>
+      <div class="newmv-list">
+        <section class="mv-item" v-for="item in newMvList" :key="item.id">
+          <img src="item.picUrl" alt="" class="img">
+          <span class="name">{{item.name}}</span>
+          <small class="artist">{{item.artistName}}</small>
+        </section>
+      </div>
     </div>
   </div>
 </template>
@@ -110,7 +131,8 @@ import Banner from "../components/Banner.vue";
 import {
   getPersonalizedApi,
   getPrivatecontentApi,
-  getNewSongApi
+  getNewSongApi,
+  getNewMVApi
 } from "../service/api";
 export default {
   name: "",
@@ -119,7 +141,8 @@ export default {
     return {
       recommendList: [],
       PrivatecontentList: [],
-      newSongList: []
+      newSongList: [],
+      newMvList: []
     };
   },
 
@@ -127,10 +150,13 @@ export default {
     Banner
   },
 
+  computed: {},
+
   created() {
     this._getPersonalized();
     this._getPrivatecontent();
     this._getNewSong();
+    this._getNewMV();
   },
 
   mounted() {},
@@ -152,9 +178,16 @@ export default {
     },
     _getNewSong() {
       getNewSongApi().then(res => {
-        console.log(res);
         if (res.data.code === 200) {
           this.newSongList = res.data.result;
+        }
+      });
+    },
+    _getNewMV() {
+      getNewMVApi().then(res => {
+        console.log(res);
+        if (res.data.code === 200) {
+          this.newMvList = res.data.result;
         }
       });
     }
@@ -250,14 +283,27 @@ export default {
           margin-top: 100%;
         }
         .recomd-cover {
+          position: relative;
           width: 100%;
           height: 100%;
           background-size: cover;
           background-repeat: no-repeat;
+          &:hover {
+            &:after {
+              position: absolute;
+              content: "";
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background: rgba(255, 255, 255, 0.2);
+              transition: all 0.2s;
+            }
+          }
           .play-count {
             position: absolute;
-            right: 10px;
-            top: 10px;
+            right: 2px;
+            top: 2px;
             height: 14px;
             line-height: 14px;
             color: #fff;
@@ -366,17 +412,24 @@ export default {
         &:nth-child(even) {
           border-left: 1px solid #d2d2d4;
         }
-        &:nth-child(3n + 1) {
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(7),
+        &:nth-child(8) {
           background: #fafafc;
+          &:hover {
+            background: #f2f2f3;
+          }
         }
         .song-cover {
           display: flex;
           align-items: center;
           .index {
             display: inline-block;
-            width: 28px;
+            width: 32px;
+            font-size: 13px;
             text-align: center;
-            color: #959596;
+            color: #333;
           }
           .cover {
             width: 50px;
@@ -392,9 +445,51 @@ export default {
             color: #515152;
           }
           .singer {
+            margin-top: 8px;
             font-size: 12px;
             color: #bababb;
           }
+        }
+      }
+    }
+  }
+  .recommend-mv {
+    margin-top: 20px;
+    .title-inner {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      height: 40px;
+      line-height: 40px;
+      color: #999;
+      border-bottom: 1px solid #e8e8e8;
+      .left {
+        font-size: 14px;
+        .icon {
+          color: #d43b33;
+        }
+        .text {
+        }
+      }
+      .right {
+        font-size: 12px;
+      }
+    }
+    .newmv-list {
+      display: flex;
+      justify-content: space-between;
+      .mv-item {
+        width: 20%;
+        .img {
+          display: block;
+          max-width: 100%;
+        }
+        .name {
+          font-size: 12px;
+        }
+        .artist {
+          margin-top: 10px;
+          font-size: 10px;
         }
       }
     }
