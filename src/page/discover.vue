@@ -54,7 +54,7 @@
           <div class="recomd-cover" :style="{backgroundImage: `url(${item.picUrl})`}">
             <span class="play-count">{{item.playCount | ten}}</span>
           </div>
-          <!-- <p class="recomd-desc">{{item.name}}</p> -->
+          <p class="recomd-desc">{{item.name}}</p>
         </section>
       </div>
     </div>
@@ -89,20 +89,37 @@
           <i class="icon">></i>
         </div>
       </div>
+      <ul class="newsong-list">
+        <li class="song-item" v-for="(item, index) in newSongList" :key="item.id">
+          <div class="song-cover">
+            <span class="index">{{index}}</span>
+            <img class="cover" :src="item.song.album.picUrl" alt="">
+          </div>
+          <div class="song-info">
+            <span class="song-name">{{item.song.name}}</span>
+            <small class="singer">{{item.song.artists[0].name}}</small>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script type="ecmascript-6">
 import Banner from "../components/Banner.vue";
-import { getPersonalizedApi, getPrivatecontentApi } from "../service/api";
+import {
+  getPersonalizedApi,
+  getPrivatecontentApi,
+  getNewSongApi
+} from "../service/api";
 export default {
   name: "",
 
   data() {
     return {
       recommendList: [],
-      PrivatecontentList: []
+      PrivatecontentList: [],
+      newSongList: []
     };
   },
 
@@ -113,6 +130,7 @@ export default {
   created() {
     this._getPersonalized();
     this._getPrivatecontent();
+    this._getNewSong();
   },
 
   mounted() {},
@@ -120,7 +138,6 @@ export default {
   methods: {
     _getPersonalized() {
       getPersonalizedApi().then(res => {
-        console.log(res);
         if (res.data.code === 200) {
           this.recommendList = res.data.result;
         }
@@ -128,9 +145,16 @@ export default {
     },
     _getPrivatecontent() {
       getPrivatecontentApi().then(res => {
-        console.log(res);
         if (res.data.code === 200) {
           this.PrivatecontentList = res.data.result;
+        }
+      });
+    },
+    _getNewSong() {
+      getNewSongApi().then(res => {
+        console.log(res);
+        if (res.data.code === 200) {
+          this.newSongList = res.data.result;
         }
       });
     }
@@ -192,7 +216,7 @@ export default {
     .title-inner {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 6px;
       height: 40px;
       line-height: 40px;
       color: #999;
@@ -210,6 +234,7 @@ export default {
       }
     }
     .recommend-list {
+      position: relative;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -217,22 +242,22 @@ export default {
         position: relative;
         width: 20%;
         box-sizing: border-box;
-        padding: 10px;
-        margin-bottom: 30px;
+        padding: 6px 8px;
+        margin-bottom: 20px;
+        &:after {
+          display: block;
+          content: "";
+          margin-top: 100%;
+        }
         .recomd-cover {
           width: 100%;
           height: 100%;
-          background-size: contain;
+          background-size: cover;
           background-repeat: no-repeat;
-          &:after {
-            display: block;
-            content: "";
-            margin-top: 100%;
-          }
           .play-count {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 10px;
+            top: 10px;
             height: 14px;
             line-height: 14px;
             color: #fff;
@@ -246,11 +271,16 @@ export default {
           }
         }
         .recomd-desc {
-          // white-space: nowrap;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
-          // margin-top: 8px;
-          // line-height: 1;
+          position: absolute;
+          bottom: -10px;
+          left: 10px;
+          right: 10px;
+          font-size: 12px;
+          line-height: 1.2;
+          color: rgb(143, 138, 138);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -292,7 +322,79 @@ export default {
           overflow: hidden;
           text-overflow: ellipsis;
           margin-top: 8px;
-          line-height: 1;
+          font-size: 12px;
+          line-height: 1.2;
+          color: rgb(143, 138, 138);
+        }
+      }
+    }
+  }
+  .recent-wrapper {
+    margin-top: 20px;
+    .title-inner {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      height: 40px;
+      line-height: 40px;
+      color: #999;
+      border-bottom: 1px solid #e8e8e8;
+      .left {
+        font-size: 14px;
+        .icon {
+          color: #d43b33;
+        }
+        .text {
+        }
+      }
+      .right {
+        font-size: 12px;
+      }
+    }
+    .newsong-list {
+      display: flex;
+      flex-wrap: wrap;
+      .song-item {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        width: 50%;
+        background: #f4f4f6;
+        &:hover {
+          background: #f2f2f3;
+        }
+        &:nth-child(even) {
+          border-left: 1px solid #d2d2d4;
+        }
+        &:nth-child(3n + 1) {
+          background: #fafafc;
+        }
+        .song-cover {
+          display: flex;
+          align-items: center;
+          .index {
+            display: inline-block;
+            width: 28px;
+            text-align: center;
+            color: #959596;
+          }
+          .cover {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        .song-info {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          .song-name {
+            font-size: 13px;
+            color: #515152;
+          }
+          .singer {
+            font-size: 12px;
+            color: #bababb;
+          }
         }
       }
     }
