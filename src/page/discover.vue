@@ -54,7 +54,7 @@
           <div class="recomd-cover" :style="{backgroundImage: `url(${item.picUrl})`}">
             <span class="play-count">{{item.playCount | ten}}</span>
           </div>
-          <p class="recomd-desc">{{item.name}}</p>
+          <!-- <p class="recomd-desc">{{item.name}}</p> -->
         </section>
       </div>
     </div>
@@ -215,19 +215,20 @@ export default {
       flex-wrap: wrap;
       .recomd-box {
         position: relative;
-        margin-left: 10px;
-        margin-right: 10px;
+        width: 20%;
+        box-sizing: border-box;
+        padding: 10px;
         margin-bottom: 30px;
-        width: 15%;
-        &:after {
-          display: block;
-          content: "";
-          margin-top: 100%;
-        }
         .recomd-cover {
+          width: 100%;
           height: 100%;
-          background-size: 100% 100%;
+          background-size: contain;
           background-repeat: no-repeat;
+          &:after {
+            display: block;
+            content: "";
+            margin-top: 100%;
+          }
           .play-count {
             position: absolute;
             right: 0;
@@ -245,11 +246,11 @@ export default {
           }
         }
         .recomd-desc {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          margin-top: 8px;
-          line-height: 1;
+          // white-space: nowrap;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          // margin-top: 8px;
+          // line-height: 1;
         }
       }
     }

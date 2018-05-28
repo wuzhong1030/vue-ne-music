@@ -54,6 +54,7 @@ export default {
         loop: true,
         loopedSlides: 8,
         autoplay: 2000,
+        speed: 600,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
