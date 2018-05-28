@@ -42,3 +42,8 @@ export function getBanner() {
 export function getPersonalizedApi() {
   return axios.get(baseUrl + `/personalized`);
 }
+
+//独家放送
+export function getPrivatecontentApi() {
+  return axios.get(baseUrl + `/personalized/privatecontent`);
+}

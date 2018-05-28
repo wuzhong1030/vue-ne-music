@@ -58,18 +58,38 @@
         </section>
       </div>
     </div>
+    <!-- 独家放送 -->
+    <div class="exclusive-wrapper">
+      <div class="title-inner">
+        <div class="left">
+          <i class="icon"></i>
+          <span class="text">推荐歌单</span>
+        </div>
+        <div class="right">
+          <span class="text">更多</span>
+          <i class="icon">></i>
+        </div>
+      </div>
+      <div class="privatecontent-list">
+        <section class="priv-item" v-for="item in PrivatecontentList" :key="item.id">
+          <img :src="item.sPicUrl" alt="" class="priv-item__img">
+          <p class="desc" v-text="item.name"></p>
+        </section>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="ecmascript-6">
 import Banner from "../components/Banner.vue";
-import { getPersonalizedApi } from "../service/api";
+import { getPersonalizedApi, getPrivatecontentApi } from "../service/api";
 export default {
   name: "",
 
   data() {
     return {
-      recommendList: []
+      recommendList: [],
+      PrivatecontentList: []
     };
   },
 
@@ -79,6 +99,7 @@ export default {
 
   created() {
     this._getPersonalized();
+    this._getPrivatecontent();
   },
 
   mounted() {},
@@ -89,6 +110,14 @@ export default {
         console.log(res);
         if (res.data.code === 200) {
           this.recommendList = res.data.result;
+        }
+      });
+    },
+    _getPrivatecontent() {
+      getPrivatecontentApi().then(res => {
+        console.log(res);
+        if (res.data.code === 200) {
+          this.PrivatecontentList = res.data.result;
         }
       });
     }
@@ -202,6 +231,47 @@ export default {
           }
         }
         .recomd-desc {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-top: 8px;
+          line-height: 1;
+        }
+      }
+    }
+  }
+  .exclusive-wrapper {
+    margin-top: 20px;
+    .title-inner {
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      line-height: 40px;
+      color: #999;
+      border-bottom: 1px solid #e8e8e8;
+      .left {
+        font-size: 14px;
+        .icon {
+          color: #d43b33;
+        }
+        .text {
+        }
+      }
+      .right {
+        font-size: 12px;
+      }
+    }
+    .privatecontent-list {
+      display: flex;
+      justify-content: space-between;
+      .priv-item {
+        width: 32%;
+        height: 100%;
+        .priv-item__img {
+          width: 100%;
+          height: 100%;
+        }
+        .desc {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
