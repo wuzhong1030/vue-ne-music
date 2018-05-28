@@ -77,6 +77,19 @@
         </section>
       </div>
     </div>
+    <!-- 最新音乐 -->
+    <div class="recent-wrapper">
+      <div class="title-inner">
+        <div class="left">
+          <i class="icon"></i>
+          <span class="text">推荐歌单</span>
+        </div>
+        <div class="right">
+          <span class="text">更多</span>
+          <i class="icon">></i>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
