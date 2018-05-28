@@ -179,6 +179,7 @@ export default {
     .title-inner {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 16px;
       height: 40px;
       line-height: 40px;
       color: #999;
@@ -245,6 +246,7 @@ export default {
     .title-inner {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 16px;
       height: 40px;
       line-height: 40px;
       color: #999;
